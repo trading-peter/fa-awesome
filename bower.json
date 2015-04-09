@@ -1,7 +1,10 @@
 {
   "name": "fa-awesome",
   "version": "0.1.0",
-  "description": "Web component that inserts icons of font-awesome.",
+  "authors": [
+    "Peter Kaske"
+  ],
+  "description": "Polymer element that shows icons of font-awesome. Build with Polymer 0.8-rc2.",
   "license": "MIT",
   "keywords": [
     "seed",
