@@ -1,0 +1,152 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example with label
+
+    <fa-awesome icon="flag">A label for the icon</fa-awesome>
+
+##### Example with label placed on the left side
+
+    <fa-awesome icon="chevron-right" label-left>Go right</fa-awesome>
+
+@element fa-awesome
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://pkaske.github.io/fa-awesome
+-->
+<dom-module id="fa-awesome">
+    <link rel="import" type="css" href="../font-awesome/css/font-awesome.min.css">
+
+    <style>
+        :host {
+            display: inline-block;
+        }
+
+        #label {
+            padding-left: 5px;
+            float: right;
+        }
+
+        #label.left {
+            float: left;
+            padding-left: 0;
+            padding-right: 5px;
+        }
+    </style>
+    <template>
+        <i id="i"></i>
+        <span id="label"><content></content></span>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'fa-awesome',
+
+        properties: {
+            /**
+             * Name of the font awesome icon to show. Use the pure name without the 'fa-'.
+             *
+             * @property icon
+             * @type string
+             * @default ''
+             */
+            icon: {
+                type: String,
+                observer: 'iconChanged',
+                default: 'flag'
+            },
+
+            /**
+             * If the 'label-left' attribute is set the label is placed left (instead of right) from the icon.
+             *
+             * @property labelLeft
+             * @type bool
+             * @default false
+             */
+            labelLeft: {
+                type: Boolean,
+                observer: 'labelLeftChanged'
+            }
+        },
+
+        iconChanged: function(newValue, oldValue) {
+            this.$.i.setAttribute('class', 'fa fa-' + newValue);
+        },
+
+        labelLeftChanged: function(newValue, oldValue) {
+            if (newValue) {
+                this.$.label.setAttribute('class', 'left');
+            } else {
+                this.$.label.setAttribute('class', '');
+            }
+        }
+    });
+</script>
+
+<polymer-element name="fa-awesome" attributes="author fancy">
+  <template>
+    <link rel="stylesheet" href="fa-awesome.css">
+    <h1>Hello from fa-awesome</h1>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Dimitri Glazkov'
+       */
+      author: 'Dimitri Glazkov',
+
+      /**
+       * `fancy` is a property that does something fancy.
+       *
+       * @property fancy
+       * @type bool
+       * @default false
+       */
+      fancy: false,
+
+      ready: function () {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      /**
+       * The `sayHello` method will return a greeting.
+       *
+       * @method sayHello
+       * @param {String} greeting Pass in a specific greeting.
+       * @return {String} Returns a string greeting.
+       */
+      sayHello: function (greeting) {
+        var response = greeting || 'Hello World!';
+        return 'fa-awesome says, ' + response;
+      },
+
+      /**
+       * The `fa-awesome-lasers-success` event is fired whenever we
+       * call fireLasers.
+       *
+       * @event fa-awesome-lasers-success
+       * @param {Object} detail
+       *   @param {string} detail.sound An amazing sound.
+       */
+
+      /**
+       * The `fireLasers` method will fire the lasers. At least
+       * it will dispatch an event that claims lasers were fired :)
+       *
+       * @method fireLasers
+       */
+      fireLasers: function () {
+        this.fire('fa-awesome-lasers-success', { sound: 'Pew pew pew!' });
+      }
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,23 @@
+{
+  "name": "fa-awesome",
+  "version": "0.1.0",
+  "description": "Web component that inserts icons of font-awesome.",
+  "license": "MIT",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "fa-awesome.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.8.0-rc.2",
+    "font-awesome": "~4.3.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.6.0",
+    "polymer": "^0.8.0-rc.2"
+  }
+}
