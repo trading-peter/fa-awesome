@@ -1,7 +1,7 @@
 # fa-awesome
 
 A simple web component to show font awesome icons. Very limited in functionality, though. 
-This element requires Polymer 0.8-rc2 for it to work!
+This element requires Polymer 0.8-rc7 for it to work!
 
 ## How to use
 
