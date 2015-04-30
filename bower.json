@@ -1,6 +1,6 @@
 {
   "name": "fa-awesome",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "authors": [
     "Peter Kaske"
   ],
@@ -14,7 +14,8 @@
   "main": "fa-awesome.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^0.8.0-rc.7",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "layout": "Polymer/layout"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"

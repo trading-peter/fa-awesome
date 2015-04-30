@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../layout/layout.html">
 
 <!--
 Element providing solution to no problem in particular.
@@ -26,18 +27,18 @@ Element providing solution to no problem in particular.
 
         #label {
             padding-left: 5px;
-            float: right;
         }
 
-        #label.left {
-            float: left;
+        #wrap.horizontal-reverse #label {
             padding-left: 0;
             padding-right: 5px;
         }
     </style>
     <template>
-        <i id="i"></i>
-        <span id="label"><content></content></span>
+        <div id="wrap" class="layout horizontal center">
+            <i id="i"></i>
+            <span id="label"><content></content></span>
+        </div>
     </template>
 </dom-module>
 <script>
@@ -58,6 +59,12 @@ Element providing solution to no problem in particular.
                 default: 'flag'
             },
 
+            size: {
+                type: String,
+                observer: 'sizeChanged',
+                default: 'lg'
+            },
+
             /**
              * If the 'label-left' attribute is set the label is placed left (instead of right) from the icon.
              *
@@ -71,16 +78,20 @@ Element providing solution to no problem in particular.
             }
         },
 
-        iconChanged: function(newValue, oldValue) {
-            this.$.i.setAttribute('class', 'fa fa-' + newValue);
+        iconChanged: function(newValue) {
+            this.$.i.setAttribute('class', 'fa fa-' + newValue + ' fa-' + this.size);
         },
 
-        labelLeftChanged: function(newValue, oldValue) {
-            if (newValue) {
-                this.$.label.setAttribute('class', 'left');
-            } else {
-                this.$.label.setAttribute('class', '');
+        sizeChanged: function(newValue) {
+            if (newValue != 'lg' && newValue != '') {
+                this.size = newValue = parseInt(newValue) + 'x';
             }
+
+            this.$.i.setAttribute('class', 'fa fa-' + this.icon + ' fa-' + newValue);
+        },
+
+        labelLeftChanged: function(newValue) {
+            this.toggleClass('horizontal-reverse', newValue, this.$.wrap);
         }
     });
 </script>
