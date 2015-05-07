@@ -18,25 +18,11 @@ Element providing solution to no problem in particular.
 @homepage http://pkaske.github.io/fa-awesome
 -->
 <dom-module id="fa-awesome">
-    <link rel="stylesheet" type="css" href="../font-awesome/css/font-awesome.min.css">
-
-    <style>
-        :host {
-            display: inline-block;
-        }
-
-        #label {
-            padding-left: 5px;
-        }
-
-        #wrap.horizontal-reverse #label {
-            padding-left: 0;
-            padding-right: 5px;
-        }
-    </style>
+    <link rel="import" type="css" href="fa-awesome.css">
+    <link rel="import" type="css" href="../font-awesome/css/font-awesome.min.css">
     <template>
         <div id="wrap" class="layout horizontal center">
-            <i id="i"></i>
+            <i id="i" class="fa"></i>
             <span id="label"><content></content></span>
         </div>
     </template>
@@ -56,13 +42,13 @@ Element providing solution to no problem in particular.
             icon: {
                 type: String,
                 observer: 'iconChanged',
-                default: 'flag'
+                value: 'flag'
             },
 
             size: {
                 type: String,
                 observer: 'sizeChanged',
-                default: 'lg'
+                value: ''
             },
 
             /**
@@ -78,16 +64,23 @@ Element providing solution to no problem in particular.
             }
         },
 
-        iconChanged: function(newValue) {
-            this.$.i.setAttribute('class', 'fa fa-' + newValue + ' fa-' + this.size);
+        iconChanged: function(newValue, oldValue) {
+            this.toggleClass('fa-' + oldValue, false, this.$.i);
+            this.toggleClass('fa-' + newValue, true, this.$.i);
         },
 
-        sizeChanged: function(newValue) {
+        sizeChanged: function(newValue, oldValue) {
             if (newValue != 'lg' && newValue != '') {
                 this.size = newValue = parseInt(newValue) + 'x';
             }
 
-            this.$.i.setAttribute('class', 'fa fa-' + this.icon + ' fa-' + newValue);
+            if (newValue == '') {
+                this.toggleClass('fa-' + oldValue, false, this.$.i);
+                return;
+            }
+
+            this.toggleClass('fa-' + oldValue, false, this.$.i);
+            this.toggleClass('fa-' + newValue, true, this.$.i);
         },
 
         labelLeftChanged: function(newValue) {
