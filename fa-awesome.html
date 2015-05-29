@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../layout/layout.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
 <!--
 Element providing solution to no problem in particular.
@@ -21,7 +21,7 @@ Element providing solution to no problem in particular.
     <link rel="import" type="css" href="fa-awesome.css">
     <link rel="import" type="css" href="../font-awesome/css/font-awesome.min.css">
     <template>
-        <div id="wrap" class="layout horizontal center">
+        <div id="wrap">
             <i id="i" class="fa"></i>
             <span id="label"><content></content></span>
         </div>
@@ -84,7 +84,7 @@ Element providing solution to no problem in particular.
         },
 
         labelLeftChanged: function(newValue) {
-            this.toggleClass('horizontal-reverse', newValue, this.$.wrap);
+            this.toggleClass('reverse', newValue, this.$.wrap);
         }
     });
 </script>
