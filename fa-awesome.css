@@ -6,6 +6,10 @@
     padding-left: 5px;
 }
 
+#label.hide {
+    display: none;
+}
+
 #wrap {
     @apply(--layout-horizontal);
     @apply(--layout-center);
