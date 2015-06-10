@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../neon-animation/neon-animation.html">
 
 <!--
 Element providing solution to no problem in particular.
@@ -31,6 +32,10 @@ Element providing solution to no problem in particular.
     Polymer({
         is: 'fa-awesome',
 
+        behaviors: [
+            Polymer.NeonAnimationRunnerBehavior
+        ],
+
         properties: {
             /**
              * Name of the font awesome icon to show. Use the pure name without the 'fa-'.
@@ -61,12 +66,53 @@ Element providing solution to no problem in particular.
             labelLeft: {
                 type: Boolean,
                 observer: 'labelLeftChanged'
+            },
+
+            animated: {
+                type: Boolean,
+                value: false,
+                observer: 'animatedChanged'
+            },
+
+            visible: {
+                type: Boolean
+            },
+
+            animationConfig: {
+                value: function() {
+                    return {
+                        'entry': [{
+                            name: 'fade-in-animation',
+                            node: this
+                        }, {
+                            name: 'scale-up-animation',
+                            node: this
+                        }],
+                        'exit': [{
+                            name: 'fade-out-animation',
+                            node: this
+                        }, {
+                            name: 'scale-down-animation',
+                            node: this
+                        }]
+                    };
+                }
             }
+        },
+
+        listeners: {
+            'neon-animation-finish': '_onNeonAnimationFinish'
         },
 
         attached: function() {
             if (this.$.label.innerText.length == 0) {
                 this.toggleClass('hide', true, this.$.label);
+            }
+        },
+
+        ready: function() {
+            if (this.visible && this.animated) {
+                this.show();
             }
         },
 
@@ -91,6 +137,33 @@ Element providing solution to no problem in particular.
 
         labelLeftChanged: function(newValue) {
             this.toggleClass('reverse', newValue, this.$.wrap);
+        },
+
+        animatedChanged: function(newValue, oldValue) {
+            if (!oldValue && newValue == true) {
+                this.playAnimation('exit');
+            }
+        },
+
+        show: function() {
+            if (!this.animated) return;
+
+            this.visible = true;
+            this.style.display = 'inline-block';
+            this.playAnimation('entry');
+        },
+
+        hide: function() {
+            if (!this.animated) return;
+
+            this.visible = false;
+            this.playAnimation('exit');
+        },
+
+        _onNeonAnimationFinish: function() {
+            if (!this.visible) {
+                this.style.display = 'none';
+            }
         }
     });
 </script>
