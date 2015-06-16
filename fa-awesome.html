@@ -105,7 +105,7 @@ Element providing solution to no problem in particular.
         },
 
         attached: function() {
-            if (this.$.label.innerText.length == 0) {
+            if (this.$.label.textContent.length == 0) {
                 this.toggleClass('hide', true, this.$.label);
             }
         },
