@@ -226,7 +226,7 @@ Check out the examples below and the demo.
     },
 
     attached: function() {
-      if (this.$.label.textContent.length == 0) {
+      if (this.$.label.textContent.trim().length == 0) {
         this.toggleClass('hide', true, this.$.label);
       }
     },
@@ -257,11 +257,9 @@ Check out the examples below and the demo.
         this.size = '24';
       }
 
-      this.async(function() {
-        this.$.ico.customStyle['--iron-icon-width'] = this.size + 'px';
-        this.$.ico.customStyle['--iron-icon-height'] = this.size + 'px';
-        this.$.ico.updateStyles();
-      }, 50);
+      this.$.ico.customStyle['--iron-icon-width'] = this.size + 'px';
+      this.$.ico.customStyle['--iron-icon-height'] = this.size + 'px';
+      this.$.ico.updateStyles();
     },
 
     _labelLeftChanged: function(newValue) {
